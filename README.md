@@ -65,6 +65,15 @@ sudo apt-get install jenkins
 ### Login to Jenkins using the below URL:
 
 http://<ec2-instance-public-ip-address>:8080    [You can get the ec2-instance-public-ip-address from your AWS EC2 console page]
+### if you stop and start your instance then your public IP gets changed, hence update jenkins config file
+cd /var/lib/jenkins
+sudo nano jenkins.model.JenkinsLocationConfiguration.xml
+# <?xml version='1.1' encoding='UTF-8'?>
+# <jenkins.model.JenkinsLocationConfiguration>
+#   <jenkinsUrl>http://your-new-ip:8080/</jenkinsUrl>
+# </jenkins.model.JenkinsLocationConfiguration>
+
+sudo systemctl restart jenkins
 
 Note: If you are not interested in allowing `All Traffic` to your EC2 instance
       1. Delete the inbound traffic rule for your instance
